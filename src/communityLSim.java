@@ -103,6 +103,7 @@ public final class communityLSim {
             //right now just everyone updates their list of funds each year
             for (AbstractPlayer p : players) {
                 p.updateMoneyEachYear();
+                p.updateDebtEachYear();
                 // for each player that plays this year count how much he wins
                 if (sixtyPercentPP.contains(p) || fortyPercentWP.contains(p)) {
                     double win = game.countWin(p);
@@ -149,14 +150,17 @@ public final class communityLSim {
             System.out.println("The person with the least money has: " + leastMoney.get().getMoney());
 
         } //years
+        System.out.println();
+        System.out.println("The person who paid the most dept: " + players.stream().max(Comparator.comparing(AbstractPlayer::getDebt)).get().getDebt());
+        System.out.println("The person who paid the least dept: " + players.stream().min(Comparator.comparing(AbstractPlayer::getDebt)).get().getDebt());
     }
 
     public float maxDebtPay() {
-        return 0;
+        return players.stream().max(Comparator.comparing(AbstractPlayer::getDebt)).get().getDebt();
     }
 
     public float minDebtPay() {
-        return 0;
+        return players.stream().min(Comparator.comparing(AbstractPlayer::getDebt)).get().getDebt();
     }
 
     public float maxPocket() {
