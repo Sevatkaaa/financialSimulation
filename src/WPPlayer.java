@@ -8,6 +8,7 @@ public class WPPlayer extends AbstractPlayer implements manageDebt {
         red += 100;
     }
 
+    // count how much debt well-paid player pays per month
     @Override
     public float payOff(float debt, Random random) {
         return (float) (debt * 0.03 + random.nextFloat() * 20);

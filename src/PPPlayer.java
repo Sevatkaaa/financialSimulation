@@ -8,6 +8,7 @@ public class PPPlayer extends AbstractPlayer implements manageDebt {
         blue += 100;
     }
 
+    // count how much debt poorly-paid player pays
     @Override
     public float payOff(float debt, Random random) {
         return (float) (debt * 0.03 + random.nextFloat());

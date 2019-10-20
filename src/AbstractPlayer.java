@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
+// abstract parent class for player to define base logic and behavior
 public abstract class AbstractPlayer {
     protected static Random random = new Random();
     protected static Random randomDebt = new Random();
@@ -12,6 +13,7 @@ public abstract class AbstractPlayer {
     protected float debt;
     protected float paidDebt;
 
+    //constructor that will be extended in child classes
     AbstractPlayer(float startFunds) {
         money = startFunds-1;
         moneyOverTime = new ArrayList<>();
@@ -20,7 +22,11 @@ public abstract class AbstractPlayer {
         red = random.nextInt(100);
         green = random.nextInt(100);
         blue = random.nextInt(100);
+
+        // starting debt
         debt = 30100;
+
+        // starting paid debt (equals 0)
         paidDebt = 0;
 
         //generate 5 random unique numbers for player lottery ticket
@@ -32,6 +38,7 @@ public abstract class AbstractPlayer {
         }
     }
 
+    // method that will be overridden in each implementation
     public abstract float payOff(float debt, Random random);
 
     public int getR() {
@@ -58,15 +65,17 @@ public abstract class AbstractPlayer {
         moneyOverTime.add(money);
     }
 
+    // count each year debt for 12 month and update it
     public void updateDebtEachYear() {
         for (int i = 0; i < 12; i++) {
+            // generate how much debt need to be paid this month, add it to paid debt and remove from total debt
             float paid = payOff(debt, randomDebt);
-            if((debt - paid) > 0) {
+            if(debt > paid) {
                 debt -= paid;
                 paidDebt += paid;
-            }
-            else
+            } else {
                 break;
+            }
         }
         debt *= 1.2;
     }
