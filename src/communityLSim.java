@@ -5,12 +5,12 @@ public final class communityLSim {
 
     private static Random random = new Random();
 
-    ArrayList<AbstractPlayer> players;
+    ArrayList<Player> players;
     int numPeeps;
     game game;
     Map<String, String> map = new HashMap<>();
-    List<AbstractPlayer> sixtyPercentPP = new ArrayList<>();
-    List<AbstractPlayer> fortyPercentWP = new ArrayList<>();
+    List<Player> sixtyPercentPP = new ArrayList<>();
+    List<Player> fortyPercentWP = new ArrayList<>();
     List<Integer> sixtyPercentPPIndexes = new ArrayList<>();
     List<Integer> fortyPercentWPIndexes = new ArrayList<>();
     //you will need to add more instance variables
@@ -18,7 +18,7 @@ public final class communityLSim {
     public communityLSim(int numP) {
         numPeeps = numP;
         //create the players
-        players = new ArrayList<AbstractPlayer>();
+        players = new ArrayList<Player>();
         game = new game();
         //generate a community of 30
         for (int i = 0; i < numPeeps; i++) {
@@ -45,12 +45,12 @@ public final class communityLSim {
         return numPeeps;
     }
 
-    public AbstractPlayer getPlayer(int i) {
+    public Player getPlayer(int i) {
         return players.get(i);
     }
 
     public void addSalary() {
-        for (AbstractPlayer p : players) {
+        for (Player p : players) {
             if (p instanceof WPPlayer) {
                 p.setMoney(p.getMoney() + 0.1f);
             } else {
@@ -101,7 +101,7 @@ public final class communityLSim {
             addSalary();
             // add code so that each member of the community who plays, plays
             //right now just everyone updates their list of funds each year
-            for (AbstractPlayer p : players) {
+            for (Player p : players) {
                 p.updateMoneyEachYear();
                 p.updateDebtEachYear();
                 // for each player that plays this year count how much he wins
@@ -116,7 +116,7 @@ public final class communityLSim {
                             // return to well paid with 70%
                             // get all well-paid players
 
-                            List<AbstractPlayer> wellPaidPlayers = players.stream()
+                            List<Player> wellPaidPlayers = players.stream()
                                     .filter(pl -> pl instanceof WPPlayer)
                                     .collect(Collectors.toList());
                             //generate random index with a well-paid player
@@ -127,7 +127,7 @@ public final class communityLSim {
                             // return to poorly paid with 30%
                             // get all poorly-paid players
 
-                            List<AbstractPlayer> poorlyPaidPlayers = players.stream()
+                            List<Player> poorlyPaidPlayers = players.stream()
                                     .filter(pl -> pl instanceof PPPlayer)
                                     .collect(Collectors.toList());
                             //generate random index with a poorly-paid player
@@ -143,31 +143,31 @@ public final class communityLSim {
             game.winningLotNumber();
             System.out.println("After year " + year + " :");
 
-            Optional<AbstractPlayer> mostMoney = players.stream().collect(Collectors.maxBy(Comparator.comparing(AbstractPlayer::getMoney)));
-            Optional<AbstractPlayer> leastMoney = players.stream().collect(Collectors.minBy(Comparator.comparing(AbstractPlayer::getMoney)));
+            Optional<Player> mostMoney = players.stream().collect(Collectors.maxBy(Comparator.comparing(Player::getMoney)));
+            Optional<Player> leastMoney = players.stream().collect(Collectors.minBy(Comparator.comparing(Player::getMoney)));
 
             System.out.println("The person with the most money has: " + mostMoney.get().getMoney());
             System.out.println("The person with the least money has: " + leastMoney.get().getMoney());
 
         } //years
         System.out.println();
-        System.out.println("The person who paid the most dept: " + players.stream().max(Comparator.comparing(AbstractPlayer::getDebt)).get().getDebt());
-        System.out.println("The person who paid the least dept: " + players.stream().min(Comparator.comparing(AbstractPlayer::getDebt)).get().getDebt());
+        System.out.println("The person who paid the most dept: " + players.stream().max(Comparator.comparing(Player::getDebt)).get().getDebt());
+        System.out.println("The person who paid the least dept: " + players.stream().min(Comparator.comparing(Player::getDebt)).get().getDebt());
     }
 
     public float maxDebtPay() {
-        return players.stream().max(Comparator.comparing(AbstractPlayer::getDebt)).get().getDebt();
+        return players.stream().max(Comparator.comparing(Player::getDebt)).get().getDebt();
     }
 
     public float minDebtPay() {
-        return players.stream().min(Comparator.comparing(AbstractPlayer::getDebt)).get().getDebt();
+        return players.stream().min(Comparator.comparing(Player::getDebt)).get().getDebt();
     }
 
     public float maxPocket() {
-        return players.stream().max(Comparator.comparing(AbstractPlayer::getMoney)).get().getMoney();
+        return players.stream().max(Comparator.comparing(Player::getMoney)).get().getMoney();
     }
 
     public float minPocket() {
-        return players.stream().min(Comparator.comparing(AbstractPlayer::getMoney)).get().getMoney();
+        return players.stream().min(Comparator.comparing(Player::getMoney)).get().getMoney();
     }
 }

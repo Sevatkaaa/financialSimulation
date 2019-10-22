@@ -54,7 +54,7 @@ public final class drawLottery
 
   //draw a plot for each of the community members
   for (int i=0; i < theCommunity.getSize(); i++) {
-    AbstractPlayer p = theCommunity.getPlayer(i);
+    Player p = theCommunity.getPlayer(i);
     plotPoints(p.getR(), p.getG(), p.getB(), p.getFunds());
   }
   }

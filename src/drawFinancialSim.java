@@ -76,7 +76,7 @@ public final class drawFinancialSim
 
     //draw a plot for each of the community members
 	  for (int i=0; i < theCommunity.getSize(); i++) {
-		  AbstractPlayer p = theCommunity.getPlayer(i);
+		  Player p = theCommunity.getPlayer(i);
       //plot lottery data
 		  plotPoints(p.getR(), p.getG(), p.getB(), p.getFunds(), theCommunity.maxPocket(), theCommunity.minPocket());
       //plot debt data (comment out while developing) - cast player to a manageDebt

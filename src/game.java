@@ -27,7 +27,7 @@ public class game {
         return winningNumbers;
     }
 
-    public int countMatchesNumber(AbstractPlayer player) {
+    public int countMatchesNumber(Player player) {
         int count = 0;
         for (int i : player.getUniqueRandomNumbers()) {
             if (uniqueRandomNumbers.contains(i)) {
@@ -39,7 +39,7 @@ public class game {
 
     //count how much money wins the player with matches
 
-    public double countWin(AbstractPlayer player) {
+    public double countWin(Player player) {
         int countMatchesNumber = countMatchesNumber(player);
         switch (countMatchesNumber) {
             case 0:
